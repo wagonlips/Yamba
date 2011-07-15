@@ -1,0 +1,1 @@
+This is the tutorial in Learning Android by Marko Gargenta.
