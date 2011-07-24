@@ -31,7 +31,7 @@ public class StatusActivity extends Activity implements OnClickListener {
         updateButton.setOnClickListener(this);
         
         twitter = new Twitter("student","password");
-        twitter.setAPIRootUrl("http://yamba.computerdemon.com/api");
+        twitter.setAPIRootUrl("http://yamba.marakana.com/api");
     }
     
     // Asynchronously posts to twitter
