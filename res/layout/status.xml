@@ -9,6 +9,12 @@
     	android:layout_height="wrap_content" android:gravity="center"
     	android:textSize="30sp" 
     	android:layout_margin="10dp" android:text="@string/titleStatus"/>
+    
+    <!-- Text Counter TextView -->
+    <TextView android:layout_width="wrap_content"
+    	android:layout_height="wrap_content" android:layout_gravity="right"
+    	android:id="@+id/textCount" android:text="000"
+    	android:layout_marginRight="10dp" />
     	
     <!-- Status TextEdit -->
     <EditText android:layout_height="fill_parent" 
