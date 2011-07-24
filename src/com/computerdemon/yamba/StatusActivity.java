@@ -6,18 +6,23 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class StatusActivity extends Activity implements OnClickListener {
+public class StatusActivity extends Activity implements OnClickListener,
+		TextWatcher {
 	private static final String TAG = "StatusActivity";
 	EditText editText;
 	Button updateButton;
 	Twitter twitter;
+	TextView textCount;
 	
     /** Called when the activity is first created. */
     @Override
@@ -28,8 +33,12 @@ public class StatusActivity extends Activity implements OnClickListener {
         // Find views
         editText = (EditText) findViewById(R.id.editText);
         updateButton = (Button) findViewById(R.id.buttonUpdate);
-        
         updateButton.setOnClickListener(this);
+        
+        textCount = (TextView) findViewById(R.id.textCount);
+        textCount.setText(Integer.toString(140));
+        textCount.setTextColor(Color.GREEN);
+        editText.addTextChangedListener(this);
         
         twitter = new Twitter("student","password");
         twitter.setAPIRootUrl("http://yamba.marakana.com/api");
@@ -68,5 +77,24 @@ public class StatusActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
     	twitter.setStatus(editText.getText().toString());
     	Log.d(TAG,"onClicked");
+    }
+    
+    // TextWatcher methods
+    public void afterTextChanged(Editable statusText) {
+    	int count = 140 - statusText.length();
+    	textCount.setText(Integer.toString(count));
+    	textCount.setTextColor(Color.GREEN);
+    	if (count < 10)
+    		textCount.setTextColor(Color.YELLOW);
+    	if (count < 0)
+    		textCount.setTextColor(Color.RED);
+    }
+    
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    	
+    }
+
+    public void onTextChanged(CharSequence s, int start, int count, int after) {
+    	
     }
 }
